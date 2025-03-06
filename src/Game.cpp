@@ -41,10 +41,14 @@ class Game {
 
    private:
     void checkNeighbours(int col, int row, int type) {
-        if (grid[col][row + 1] == type) remove(col, row + 1, false);
-        if (grid[col][row - 1] == type) remove(col, row - 1, false);
-        if (grid[col + 1][row] == type) remove(col + 1, row, false);
-        if (grid[col - 1][row] == type) remove(col - 1, row, false);
+        if (isValid(col, row + 1) && (grid[col][row + 1] == type))
+            remove(col, row + 1, false);
+        if (isValid(col, row - 1) && (grid[col][row - 1] == type))
+            remove(col, row - 1, false);
+        if (isValid(col + 1, row) && (grid[col + 1][row] == type))
+            remove(col + 1, row, false);
+        if (isValid(col - 1, row) && (grid[col - 1][row] == type))
+            remove(col - 1, row, false);
     }
 
     void gravitate() {
@@ -52,5 +56,10 @@ class Game {
             grid[i].erase(std::remove(grid[i].begin(), grid[i].end(), 0),
                           grid[i].end());
         }
+    }
+
+    bool isValid(int col, int row) {
+        return !((rowSize <= col) || (col < 0) ||
+                 (grid[col].size()) <= colSize - (row + 1) || (row < 0));
     }
 };
