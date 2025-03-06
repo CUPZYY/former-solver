@@ -15,12 +15,11 @@ class Game {
 
     string stringify() {
         string res = "";
-        for (int row = 0; row < xSize; row++) {
-            for (int col = 0; col < grid.size(); col++) {
-                if (xSize - grid[col].size() <= row) {
+        for (int x = 0; x < xSize; x++) {
+            for (int y = 0; y < grid.size(); y++) {
+                if (xSize - grid[y].size() <= x) {
                     res +=
-                        to_string(grid[col][row - (xSize - grid[col].size())]) +
-                        " ";
+                        to_string(grid[y][x - (xSize - grid[y].size())]) + " ";
                 } else {
                     res += "  ";
                 }
