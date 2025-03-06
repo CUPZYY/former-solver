@@ -4,22 +4,23 @@ using namespace std;
 class Game {
    public:
     vector<vector<int> > grid;
-    int ySize;
-    int xSize;
+    int rowSize;
+    int colSize;
 
     Game(vector<vector<int> > grid) {
         this->grid = grid;
-        ySize = grid.size();
-        xSize = grid[0].size();
+        rowSize = grid.size();
+        colSize = grid[0].size();
     };
 
     string stringify() {
         string res = "";
-        for (int x = 0; x < xSize; x++) {
-            for (int y = 0; y < grid.size(); y++) {
-                if (xSize - grid[y].size() <= x) {
-                    res +=
-                        to_string(grid[y][x - (xSize - grid[y].size())]) + " ";
+        for (int col = 0; col < colSize; col++) {
+            for (int row = 0; row < rowSize; row++) {
+                if (colSize - grid[row].size() <= col) {
+                    res += to_string(
+                               grid[row][col - (colSize - grid[row].size())]) +
+                           " ";
                 } else {
                     res += "  ";
                 }
@@ -29,21 +30,21 @@ class Game {
         return res;
     }
 
-    void remove(int x, int y, bool root = true) {
-        int type = grid[x][y];
-        grid[x][y] = 0;
-        checkNeighbours(x, y, type);
+    void remove(int col, int row, bool root = true) {
+        int type = grid[col][row];
+        grid[col][row] = 0;
+        checkNeighbours(col, row, type);
         if (root) {
             gravitate();
         }
     }
 
    private:
-    void checkNeighbours(int x, int y, int type) {
-        if (grid[x][y + 1] == type) remove(x, y + 1, false);
-        if (grid[x][y - 1] == type) remove(x, y - 1, false);
-        if (grid[x + 1][y] == type) remove(x + 1, y, false);
-        if (grid[x - 1][y] == type) remove(x - 1, y, false);
+    void checkNeighbours(int col, int row, int type) {
+        if (grid[col][row + 1] == type) remove(col, row + 1, false);
+        if (grid[col][row - 1] == type) remove(col, row - 1, false);
+        if (grid[col + 1][row] == type) remove(col + 1, row, false);
+        if (grid[col - 1][row] == type) remove(col - 1, row, false);
     }
 
     void gravitate() {
