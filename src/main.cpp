@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Game.cpp"
+#include "util/FileParser.cpp"
 using namespace std;
 
 /*
@@ -10,12 +11,10 @@ using namespace std;
     4: Pink
 */
 
-vector<vector<int> > grid = {
-    {1, 2, 1, 2, 4, 1, 3, 3, 1}, {2, 3, 3, 1, 3, 1, 1, 3, 2},
-    {1, 4, 4, 1, 4, 4, 2, 3, 1}, {4, 3, 2, 3, 4, 3, 1, 4, 1},
-    {3, 4, 3, 3, 2, 3, 2, 3, 4}, {3, 2, 4, 4, 2, 3, 4, 2, 3},
-    {4, 2, 3, 1, 3, 2, 4, 1, 2}};
+vector<vector<int>> grid;
 
-Game game(grid);
-
-int main() { cout << game.stringify(); };
+int main() {
+    grid = fileToGrid("input.txt");
+    Game game(grid);
+    cout << game.stringify();
+};
