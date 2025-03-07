@@ -30,11 +30,11 @@ class Game {
         return res;
     }
 
-    void remove(int col, int row, bool root = true) {
+    void remove(int col, int row, bool gravity = true) {
         int type = grid[col][row];
         grid[col][row] = 0;
         checkNeighbours(col, row, type);
-        if (root) {
+        if (gravity) {
             gravitate();
         }
     }
