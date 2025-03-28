@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 
-vector<vector<int>> fileToGrid(const string filepath) {
+vector<vector<int>> fileToGrid(const string &filepath) {
     ifstream file(filepath);
     vector<vector<int>> grid;
     string line;

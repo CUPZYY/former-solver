@@ -11,8 +11,8 @@ Game::Game(const vector<vector<int> > &grid) {
     colSize = grid[0].size();
 };
 
-string Game::stringify() {
-    string res = "";
+string Game::stringify() const {
+    string res;
     for (int col = 0; col < colSize; col++) {
         for (int row = 0; row < rowSize; row++) {
             if (colSize - grid[row].size() <= col) {
@@ -28,8 +28,8 @@ string Game::stringify() {
     return res;
 }
 
-void Game::remove(int col, int row, bool gravity = true) {
-    int type = grid[col][row];
+void Game::remove(const int col, const int row, const bool gravity = true) {
+    const int type = grid[col][row];
     grid[col][row] = 0;
     checkNeighbours(col, row, type);
     if (gravity) {
@@ -37,7 +37,7 @@ void Game::remove(int col, int row, bool gravity = true) {
     }
 }
 
-void Game::checkNeighbours(int col, int row, int type) {
+void Game::checkNeighbours(const int col, const int row, const int type) {
     if (isValid(col, row + 1) && (grid[col][row + 1] == type))
         remove(col, row + 1, false);
     if (isValid(col, row - 1) && (grid[col][row - 1] == type))
@@ -49,13 +49,13 @@ void Game::checkNeighbours(int col, int row, int type) {
 }
 
 void Game::gravitate() {
-    for (int i = 0; i < grid.size(); i++) {
-        grid[i].erase(std::remove(grid[i].begin(), grid[i].end(), 0),
-                      grid[i].end());
+    for (auto & i : grid) {
+        i.erase(std::remove(i.begin(), i.end(), 0),
+                      i.end());
     }
 }
 
-bool Game::isValid(int col, int row) {
+bool Game::isValid(const int col, const int row) const {
     return !((rowSize <= col) || (col < 0) ||
              (grid[col].size()) <= colSize - (row + 1) || (row < 0));
 }
