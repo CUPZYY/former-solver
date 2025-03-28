@@ -8,6 +8,9 @@ using namespace std;
 
 vector<vector<int>> fileToGrid(const string &filepath) {
     ifstream file(filepath);
+    if (!file.is_open()) {
+        cerr << "Could not open file " << filepath << endl;
+    };
     vector<vector<int>> grid;
     string line;
     while (getline(file, line)) {
