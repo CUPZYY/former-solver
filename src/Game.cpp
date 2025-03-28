@@ -28,7 +28,7 @@ string Game::stringify() const {
     return res;
 }
 
-void Game::remove(const int col, const int row, const bool gravity = true) {
+void Game::remove(const int col, const int row, const bool gravity) {
     const int type = grid[col][row];
     grid[col][row] = 0;
     checkNeighbours(col, row, type);
