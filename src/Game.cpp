@@ -28,11 +28,11 @@ string Game::stringify() const {
     return res;
 }
 
-void Game::remove(const int col, const int row, const bool gravity) {
+void Game::remove(const int col, const int row, const bool isDirectCall) {
     const int type = grid[col][row];
     grid[col][row] = 0;
     checkNeighbours(col, row, type);
-    if (gravity) {
+    if (isDirectCall) {
         gravitate();
     }
 }
