@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 
-#include "Game.cpp"
-#include "util/FileParser.cpp"
+#include "Game.h"
+#include "FileParser.h"
 using namespace std;
 
 /*
