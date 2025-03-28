@@ -3,3 +3,5 @@ input.txt
 .idea
 main
 build
+cmake-build-debug
+.DS_Store
