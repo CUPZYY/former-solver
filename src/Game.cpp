@@ -33,7 +33,12 @@ void Game::remove(const int col, const int row, const bool isDirectCall) {
     grid[col][row] = 0;
     checkNeighbours(col, row, type);
     if (isDirectCall) {
-        gravitate();
+        for (int col_i = 0; col_i < rowSize; col_i++) {
+            gravitate(grid[col_i]);
+            if (grid[col_i].empty()) {
+                grid.erase(grid.begin() + col_i);
+            }
+        }
     }
 }
 
@@ -48,11 +53,8 @@ void Game::checkNeighbours(const int col, const int row, const int type) {
         remove(col - 1, row, false);
 }
 
-void Game::gravitate() {
-    for (auto & i : grid) {
-        i.erase(std::remove(i.begin(), i.end(), 0),
-                      i.end());
-    }
+void Game::gravitate(vector<int> &col) {
+    col.erase(std::remove(col.begin(), col.end(), 0), col.end());
 }
 
 bool Game::isValid(const int col, const int row) const {

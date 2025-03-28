@@ -15,7 +15,7 @@ class Game {
 
    private:
     void checkNeighbours(int col, int row, int type);
-    void gravitate();
+    void gravitate(vector<int> &col);
     bool isValid(int col, int row) const;
 };
 
