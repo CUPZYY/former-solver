@@ -42,6 +42,8 @@ void Game::remove(const int col, const int row, const bool isDirectCall) {
     }
 }
 
+bool Game::isFinished() const { return grid.empty();}
+
 void Game::checkNeighbours(const int col, const int row, const int type) {
     if (isValid(col, row + 1) && (grid[col][row + 1] == type))
         remove(col, row + 1, false);

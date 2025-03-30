@@ -12,6 +12,7 @@ class Game {
     unsigned long colSize;
     string stringify() const;
     void remove(int col, int row, bool isDirectCall = true);
+    bool isFinished() const;
 
    private:
     void checkNeighbours(int col, int row, int type);
