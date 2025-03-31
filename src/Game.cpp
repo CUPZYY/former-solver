@@ -35,9 +35,6 @@ void Game::remove(const int col, const int row, const bool isDirectCall) {
     if (isDirectCall) {
         for (int col_i = 0; col_i < rowSize; col_i++) {
             gravitate(grid[col_i]);
-            if (grid[col_i].empty()) {
-                grid.erase(grid.begin() + col_i);
-            }
         }
     }
 }
