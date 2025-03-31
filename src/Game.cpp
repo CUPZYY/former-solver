@@ -17,8 +17,8 @@ string Game::stringify() const {
         for (int row = 0; row < rowSize; row++) {
             if (colSize - grid[row].size() <= col) {
                 res +=
-                    to_string(grid[row][col - (colSize - grid[row].size())]) +
-                    " ";
+                        to_string(grid[row][col - (colSize - grid[row].size())]) +
+                        " ";
             } else {
                 res += "  ";
             }
@@ -42,7 +42,7 @@ void Game::remove(const int col, const int row, const bool isDirectCall) {
     }
 }
 
-bool Game::isFinished() const { return grid.empty();}
+bool Game::isFinished() const { return grid.empty(); }
 
 void Game::checkNeighbours(const int col, const int row, const int type) {
     if (isValid(col, row + 1) && (grid[col][row + 1] == type))
