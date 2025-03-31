@@ -9,6 +9,7 @@ using namespace std;
 MCTS::MCTS(Game &game) : game(game) {
 }
 
+Game MCTS::randomMove() {
     std::uniform_int_distribution<int> colDist(0, game.nonEmptyColumns.size() - 1);
     const int col_i = game.nonEmptyColumns[colDist(rd)];
 
