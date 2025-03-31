@@ -8,6 +8,7 @@ class Game {
    public:
     vector<vector<int> > grid;
     explicit Game(const vector<vector<int> > &grid);
+    vector<int> nonEmptyColumns;
     unsigned long rowSize;
     unsigned long colSize;
     string stringify() const;
