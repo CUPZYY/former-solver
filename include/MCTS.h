@@ -7,6 +7,7 @@ class MCTS {
    public:
     Game game;
     explicit MCTS(Game& game);
+    double simulate(const Game& gameRollout, int iterations);
    private:
     random_device rd;
     Game randomMove(Game &gameRollout);

@@ -19,4 +19,17 @@ Game MCTS::randomMove(Game &gameRollout) {
     gameRollout.remove(col_i, row_i);
     return gameRollout;
 }
+
+double MCTS::simulate(const Game &gameRollout, const int iterations) {
+    double movesTotal = 0;
+    for (int i = 0; i < iterations; i++) {
+        int moves = 0;
+        Game gameRolloutIteration = gameRollout;
+        while (!gameRolloutIteration.isFinished()) {
+            randomMove(gameRolloutIteration);
+            moves++;
+        }
+        movesTotal += moves;
+    }
+    return movesTotal / iterations;
 }
