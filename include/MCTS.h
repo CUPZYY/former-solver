@@ -8,6 +8,7 @@ class MCTS {
     Game game;
     explicit MCTS(Game& game);
    private:
+    random_device rd;
     Game randomMove();
 };
 
