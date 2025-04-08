@@ -32,8 +32,9 @@ string Game::stringify() const {
 }
 
 void Game::remove(const int col, const int row, const bool isDirectCall) {
-    const int type = grid[col][row];
-    grid[col][row] = 0;
+    const int actualRow = convertRow(row, col);
+    const int type = grid[col][actualRow];
+    grid[col][actualRow] = 0;
     checkNeighbours(col, row, type);
     if (isDirectCall) {
         for (int col_i = 0; col_i < nonEmptyColumns.size(); col_i++) {
@@ -48,14 +49,21 @@ void Game::remove(const int col, const int row, const bool isDirectCall) {
 bool Game::isFinished() const { return nonEmptyColumns.empty(); }
 
 void Game::checkNeighbours(const int col, const int row, const int type) {
-    if (isValid(col, row + 1) && (grid[col][row + 1] == type))
-        remove(col, row + 1, false);
-    if (isValid(col, row - 1) && (grid[col][row - 1] == type))
+    const int actualRow = convertRow(row, col);
+    const int leftRow = convertRow(row, col - 1);
+    const int rightRow = convertRow(row, col + 1);
+    if (isValid(col, row - 1) && (grid[col][actualRow + 1] == type)) {
         remove(col, row - 1, false);
-    if (isValid(col + 1, row) && (grid[col + 1][row] == type))
+    }
+    if (isValid(col, row + 1) && (grid[col][actualRow - 1] == type)) {
+        remove(col, row + 1, false);
+    }
+    if (isValid(col + 1, row) && (grid[col + 1][rightRow] == type)) {
         remove(col + 1, row, false);
-    if (isValid(col - 1, row) && (grid[col - 1][row] == type))
+    }
+    if (isValid(col - 1, row) && (grid[col - 1][leftRow] == type)) {
         remove(col - 1, row, false);
+    }
 }
 
 void Game::gravitate(vector<int> &col) {
@@ -63,6 +71,10 @@ void Game::gravitate(vector<int> &col) {
 }
 
 bool Game::isValid(const int col, const int row) const {
-    return !((rowSize <= col) || (col < 0) ||
-             (grid[col].size()) <= colSize - (row + 1) || (row < 0));
+    return !(!binary_search(nonEmptyColumns.begin(), nonEmptyColumns.end(), col) ||
+             grid[col].size() <= row || row < 0);
+}
+
+int Game::convertRow(const int row, const int col) const {
+    return grid[col].size() - row - 1;
 }
