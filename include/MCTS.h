@@ -6,7 +6,13 @@
 class MCTS {
    public:
     Game game;
-    explicit MCTS(Game& game);
+    explicit MCTS(Game &game);
+    struct Move {
+        int col;
+        int row;
+        double moves;
+    };
+    Move findNextMove(int iterations);
     double simulate(const Game& gameRollout, int iterations);
    private:
     random_device rd;
