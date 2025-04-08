@@ -37,7 +37,7 @@ void Game::remove(const int col, const int row, const bool isDirectCall) {
     grid[col][actualRow] = 0;
     checkNeighbours(col, row, type);
     if (isDirectCall) {
-        for (int col_i = 0; col_i < nonEmptyColumns.size(); col_i++) {
+        for (int col_i = nonEmptyColumns.size() - 1; col_i >= 0; col_i--) {
             gravitate(grid[nonEmptyColumns[col_i]]);
             if (grid[nonEmptyColumns[col_i]].empty()) {
                 nonEmptyColumns.erase(nonEmptyColumns.begin() + col_i);
