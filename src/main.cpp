@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 
-#include "Game.h"
 #include "FileParser.h"
+#include "Game.h"
+#include "MCTS.h"
 using namespace std;
 
 /*
@@ -17,5 +18,6 @@ vector<vector<int>> grid;
 int main() {
     grid = fileToGrid("input.txt");
     Game game(grid);
-    cout << game.stringify();
+    MCTS solver(game);
+    vector<MCTS::Move> moves = solver.solve(550);
 };

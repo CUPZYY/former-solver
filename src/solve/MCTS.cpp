@@ -3,10 +3,25 @@
 #include <Game.h>
 
 #include <random>
+#include <iostream>
+#include <utility>
 
 using namespace std;
 
 MCTS::MCTS(Game &game) : game(game) {
+}
+
+vector <MCTS::Move> MCTS::solve(const int iterations) {
+    vector <Move> moves = {};
+    while (!game.isFinished()) {
+        Move move = findNextMove(iterations);
+        game.remove(move.col, move.row);
+        moves.push_back(move);
+        cout << moves.size() << ": Made move: (" << move.col << ", " << move.row << ") with and average of " << move.moves << " moves left." << endl;
+        cout << game.stringify() << endl;
+    }
+    cout << "Finished using " << moves.size() << " moves" << endl;
+    return moves;
 }
 
 MCTS::Move MCTS::findNextMove(const int iterations) {
@@ -29,7 +44,6 @@ MCTS::Move MCTS::findNextMove(const int iterations) {
 Game MCTS::randomMove(Game &gameRollout) {
     std::uniform_int_distribution<int> colDist(0, gameRollout.nonEmptyColumns.size() - 1);
     const int col_i = gameRollout.nonEmptyColumns[colDist(rd)];
-
     std::uniform_int_distribution<int> rowDist(0, gameRollout.grid[col_i].size() - 1);
     const int row_i = rowDist(rd);
 

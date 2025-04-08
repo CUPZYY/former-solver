@@ -12,6 +12,8 @@ class MCTS {
         int row;
         double moves;
     };
+
+    vector<MCTS::Move> solve(int iterations);
     Move findNextMove(int iterations);
     double simulate(const Game& gameRollout, int iterations);
    private:
