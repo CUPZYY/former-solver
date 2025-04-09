@@ -15,8 +15,8 @@ using namespace std;
 
 vector<vector<int> > grid;
 
-int main() {
-    grid = fileToGrid("input.txt");
+int main(int argc, char *argv[]) {
+    grid = fileToGrid(argv[1]);
     Game game(grid);
     MCTS solver(game);
     vector<MCTS::Move> moves = solver.solve(550);
