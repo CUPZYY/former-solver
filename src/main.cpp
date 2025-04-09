@@ -13,7 +13,7 @@ using namespace std;
     4: Pink
 */
 
-vector<vector<int>> grid;
+vector<vector<int> > grid;
 
 int main() {
     grid = fileToGrid("input.txt");

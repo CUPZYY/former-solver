@@ -4,9 +4,11 @@
 #include <random>
 
 class MCTS {
-   public:
+public:
     Game game;
+
     explicit MCTS(Game &game);
+
     struct Move {
         int col;
         int row;
@@ -14,10 +16,14 @@ class MCTS {
     };
 
     vector<MCTS::Move> solve(int iterations);
+
     Move findNextMove(int iterations);
-    double simulate(const Game& gameRollout, int iterations);
-   private:
+
+    double simulate(const Game &gameRollout, int iterations);
+
+private:
     random_device rd;
+
     Game randomMove(Game &gameRollout);
 };
 

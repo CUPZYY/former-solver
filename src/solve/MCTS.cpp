@@ -11,13 +11,14 @@ using namespace std;
 MCTS::MCTS(Game &game) : game(game) {
 }
 
-vector <MCTS::Move> MCTS::solve(const int iterations) {
-    vector <Move> moves = {};
+vector<MCTS::Move> MCTS::solve(const int iterations) {
+    vector<Move> moves = {};
     while (!game.isFinished()) {
         Move move = findNextMove(iterations);
         game.remove(move.col, move.row);
         moves.push_back(move);
-        cout << moves.size() << ": Made move: (" << move.col << ", " << move.row << ") with and average of " << move.moves << " moves left." << endl;
+        cout << moves.size() << ": Made move: (" << move.col << ", " << move.row << ") with and average of " << move.
+                moves << " moves left." << endl;
         cout << game.stringify() << endl;
     }
     cout << "Finished using " << moves.size() << " moves" << endl;
@@ -27,7 +28,7 @@ vector <MCTS::Move> MCTS::solve(const int iterations) {
 MCTS::Move MCTS::findNextMove(const int iterations) {
     // bestMove contains index of column, index of row and the average moves until completion
     Move bestMove = {-1, -1, 1000000};
-    for (const int col_i : game.nonEmptyColumns) {
+    for (const int col_i: game.nonEmptyColumns) {
         vector<int> col = game.grid[col_i];
         for (int row_i = 0; row_i < col.size(); row_i++) {
             Game gameRollout = game;

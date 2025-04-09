@@ -4,6 +4,6 @@
 #include <string>
 using namespace std;
 
-vector<vector<int>> fileToGrid(const string &filepath);
+vector<vector<int> > fileToGrid(const string &filepath);
 
 #endif //FILEPARSER_H
