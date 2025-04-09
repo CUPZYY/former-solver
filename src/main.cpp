@@ -16,8 +16,15 @@ using namespace std;
 vector<vector<int> > grid;
 
 int main(int argc, char *argv[]) {
+    const chrono::time_point<chrono::steady_clock> start = chrono::high_resolution_clock::now();
+
     grid = fileToGrid(argv[1]);
     Game game(grid);
     MCTS solver(game);
     vector<MCTS::Move> moves = solver.solve(550);
+
+    const chrono::time_point<chrono::steady_clock> end = chrono::high_resolution_clock::now();
+    const chrono::duration<double> elapsed = end - start;
+
+    cout << "Finished using " << moves.size() << " moves in " << elapsed.count() << " seconds." << endl;
 };

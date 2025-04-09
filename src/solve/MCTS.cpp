@@ -21,7 +21,6 @@ vector<MCTS::Move> MCTS::solve(const int iterations) {
                 moves << " moves left." << endl;
         cout << game.stringify() << endl;
     }
-    cout << "Finished using " << moves.size() << " moves" << endl;
     return moves;
 }
 
