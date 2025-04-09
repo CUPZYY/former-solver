@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(include)
 
 add_executable(former_solver
-    src/util/FileParser.cpp
-    src/Game.cpp
-    src/main.cpp
+        src/util/FileParser.cpp
+        src/Game.cpp
+        src/main.cpp
         src/solve/MCTS.cpp
         include/MCTS.h)
 
