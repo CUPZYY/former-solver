@@ -42,10 +42,26 @@ MCTS::Move MCTS::findNextMove(const int iterations) {
 }
 
 Game MCTS::randomMove(Game &gameRollout) {
-    std::uniform_int_distribution<int> colDist(0, gameRollout.nonEmptyColumns.size() - 1);
-    const int col_i = gameRollout.nonEmptyColumns[colDist(rd)];
-    std::uniform_int_distribution<int> rowDist(0, gameRollout.grid[col_i].size() - 1);
-    const int row_i = rowDist(rd);
+    int total = 0;
+    for (const vector<int>& col: gameRollout.grid) {
+        total += col.size();
+    }
+
+    uniform_int_distribution<int> totalDist(0, total - 1);
+    const int total_i = totalDist(rd);
+
+    int col_i = 0;
+    int row_i = 0;
+
+    int total_left = total_i;
+    for (int col_index: gameRollout.nonEmptyColumns) {
+        if (gameRollout.grid[col_index].size() > total_left) {
+            col_i = col_index;
+            row_i = total_left;
+            break;
+        }
+        total_left -= gameRollout.grid[col_index].size();
+    }
 
     gameRollout.remove(col_i, row_i);
     return gameRollout;
